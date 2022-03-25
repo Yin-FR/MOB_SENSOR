@@ -21,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
     SensorEventListener accelerometerListener;
 
     RadioButton positionButton;
+    Float initialX;
+    Float initialY;
 
     private void initView() {
         positionButton = (RadioButton) findViewById(R.id.radioButton);
+        initialX = positionButton.getX();
+        initialY = positionButton.getY();
     }
 
     @Override
@@ -39,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSensorChanged(SensorEvent event) {
                 float[] values = event.values;
                 positionButton.setText("x: "+values[0]+"\ty: "+values[1]);
-                positionButton.setX(values[0]);
-                positionButton.setY(values[1]);
+                positionButton.setX(initialX + values[0] * 10);
+                positionButton.setY(initialY + values[1] * 10);
             }
         };
 
